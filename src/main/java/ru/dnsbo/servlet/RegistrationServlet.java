@@ -47,11 +47,19 @@ public class RegistrationServlet extends HttpServlet {
         String passwordRegistration = request.getParameter("passwordRegistration");
 
         try {
-            Statement statement = connection.createStatement();
+           /* Statement statement = connection.createStatement();
             String InsertReferee = "INSERT INTO referee(secondnameregistration, nameregistration, emailregistration, passwordregistration)" +
                     "VALUES ('" + secondNameRegistration + "','" + nameRegistration + "','" + emailRegistration + "','" + passwordRegistration + "');";
             System.out.println(InsertReferee);
-            statement.executeUpdate(InsertReferee);
+            statement.executeUpdate(InsertReferee);*/
+
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " + "referee(secondnameregistration, nameregistration, emailregistration, passwordregistration) "
+            + "VALUES(?,?,?,?);");
+            preparedStatement.setString(1,secondNameRegistration);
+            preparedStatement.setString(2,nameRegistration);
+            preparedStatement.setString(3,emailRegistration);
+            preparedStatement.setString(4,passwordRegistration);
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
