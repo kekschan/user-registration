@@ -1,4 +1,4 @@
-package ru.dnsbo.servlet;
+package ru.dnsbo.db.servlet;
 
 import java.io.*;
 import java.nio.file.Files;

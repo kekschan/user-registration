@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/b8ea02a3-6652-42ad-bb6c-235082ec6202/console.sql" dialect="PostgreSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/ru/dnsbo/servlet/RegistrationServlet.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/ru/dnsbo/db/dao/RefereesDaoJdbcIml.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/ru/dnsbo/db/servlet/HomeServlet.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/ru/dnsbo/db/servlet/RegistrationServlet.java" dialect="GenericSQL" />
   </component>
 </project>
