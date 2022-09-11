@@ -70,6 +70,8 @@ public class HomeServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        request.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+
     }
 
     @Override
