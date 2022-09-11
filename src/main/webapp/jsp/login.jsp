@@ -27,7 +27,7 @@
             <h3>Клуб Спортивных Судей</h3>
         </div>
         <div class="login-form">
-            <form method="get" action="login">
+            <form method="get" action="home">
                 <div class="control-group">
                     <label class="login-field-icon fui-user" for="LoginSecondName">
                         <input type="text" class="login-field" value="" placeholder="Фамилия" name="LoginSecondName"
