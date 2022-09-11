@@ -26,6 +26,12 @@ public class Referees {
         this.password = password;
     }
 
+    public Referees(String secondName, String name, String password) {
+        this.secondName = secondName;
+        this.name = name;
+        this.password = password;
+    }
+
     public Integer getId() {
         return id;
     }

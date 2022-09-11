@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 @WebServlet("/home")
@@ -28,49 +30,58 @@ public class HomeServlet extends HttpServlet {
             String driverClass = properties.getProperty("db.driverClassName");
 
             Class.forName(driverClass);
-            connection = DriverManager.getConnection(dbUrl,dbUser,dbPassword);
+            connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
         } catch (IOException | ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    private final String SQL_SELECT_BY_ID = "SELECT * FROM referee";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Referees> refereesAll = new ArrayList<>();
 
         String LoginSecondName = request.getParameter("LoginSecondName");
         String LoginName = request.getParameter("LoginName");
         String LoginPassword = request.getParameter("LoginPassword");
 
+
+
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
+            String SQL_SELECT_BY_ID = "SELECT * FROM referee ";
             preparedStatement = connection.prepareStatement(SQL_SELECT_BY_ID);
             resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+
+            while (resultSet.next()) {
                 String secondNameRegistration = resultSet.getString("secondnameregistration");
                 String nameRegistration = resultSet.getString("nameregistration");
                 String passwordRegistration = resultSet.getString("passwordregistration");
 
-                if(LoginSecondName.equals(secondNameRegistration)&(LoginName.equals(nameRegistration))&(LoginPassword.equals(passwordRegistration))){
+                Referees referees = new Referees(secondNameRegistration, nameRegistration, passwordRegistration);
+                refereesAll.add(referees);
+            }
+
+            for (int i = 0; i < refereesAll.size();){
+                if (refereesAll.get(i).getSecondName().equals(LoginSecondName)&refereesAll.get(i).getName().equals(LoginName)&refereesAll.get(i).getPassword().equals(LoginPassword)){
                     request.getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request,response);
                 }else {
                     request.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request,response);
+                    i++;
                 }
             }
+
+            System.out.println(refereesAll.size());
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
-
-
-
-
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
 
     }
 }
