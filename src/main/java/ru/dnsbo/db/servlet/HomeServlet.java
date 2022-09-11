@@ -53,7 +53,7 @@ public class HomeServlet extends HttpServlet {
             String SQL_SELECT_BY_ID = "SELECT * FROM referee ";
             preparedStatement = connection.prepareStatement(SQL_SELECT_BY_ID);
             resultSet = preparedStatement.executeQuery();
-
+            int i = 0;
             while (resultSet.next()) {
                 String secondNameRegistration = resultSet.getString("secondnameregistration");
                 String nameRegistration = resultSet.getString("nameregistration");
@@ -61,19 +61,12 @@ public class HomeServlet extends HttpServlet {
 
                 Referees referees = new Referees(secondNameRegistration, nameRegistration, passwordRegistration);
                 refereesAll.add(referees);
-            }
 
-            for (int i = 0; i < refereesAll.size();){
-                if (refereesAll.get(i).getSecondName().equals(LoginSecondName)&refereesAll.get(i).getName().equals(LoginName)&refereesAll.get(i).getPassword().equals(LoginPassword)){
-                    request.getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request,response);
-                }else {
-                    request.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request,response);
-                    i++;
+                if (refereesAll.get(i).getSecondName().equals(LoginSecondName)&refereesAll.get(i).getName().equals(LoginName)&refereesAll.get(i).getPassword().equals(LoginPassword)) {
+                    request.getServletContext().getRequestDispatcher("/jsp/home.jsp").forward(request, response);
                 }
+                    i++;
             }
-
-            System.out.println(refereesAll.size());
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
