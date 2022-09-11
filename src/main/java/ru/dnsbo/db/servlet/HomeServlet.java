@@ -45,8 +45,6 @@ public class HomeServlet extends HttpServlet {
         String LoginName = request.getParameter("LoginName");
         String LoginPassword = request.getParameter("LoginPassword");
 
-
-
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {

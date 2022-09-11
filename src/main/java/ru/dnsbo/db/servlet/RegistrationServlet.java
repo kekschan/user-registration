@@ -64,5 +64,7 @@ public class RegistrationServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        request.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request,response);
     }
 }
